@@ -21,6 +21,14 @@ public class DashboardPage {
     @FindBy(xpath = "//a[text()='Add Employee']")
     private WebElement addEmployeeLink;
     
+ // Admin Menu
+    @FindBy(xpath = "//span[text()='Admin']/parent::a")
+    private WebElement adminMenu;
+
+    // Roles Link (under Admin menu)
+    @FindBy(xpath = "//a[text()='User Roles']")
+    private WebElement rolesLink;
+    
     public DashboardPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -49,5 +57,26 @@ public class DashboardPage {
 
         // Return the AddEmployeePage object
         return new AddEmployeePage(driver);
+    }
+    
+    // Method to navigate to the Admin menu
+    public AdminPage navigateToAdminMenu() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(adminMenu));
+        adminMenu.click();
+		return null;
+    }
+    
+    public RolesPage navigateToRolesPage() {
+        // Navigate to the Admin menu first
+        navigateToAdminMenu();
+
+        // Wait for the Roles link to be clickable
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(rolesLink));
+        rolesLink.click();
+
+        // Return the RolesPage object
+        return new RolesPage(driver);
     }
 }

@@ -5,7 +5,7 @@
     <classes>
       <class name="com.orangehrm.tests.LoginTest">
         <methods>
-          <include name="testAddEmployee"/>
+          <include name="testSearchAdminRole"/>
           <include name="tearDown"/>
           <include name="setUp"/>
         </methods>
